@@ -1,8 +1,8 @@
 // Dependencies
 var express = require("express");
 var path = require("path");
-var html = require("./routing/htmlRoutes");
-var data = require("./data/friends")
+var html = require("./app/routing/htmlRoutes");
+var data = require("./app/data/friends")
 
 // Create express app instance.
 var app = express();
@@ -39,12 +39,12 @@ var friends = [
 // Routes
 //home
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "public/home.html"));
+  res.sendFile(path.join(__dirname, "app/public/home.html"));
 });
 
 //survey
 app.get("/survey", function(req, res) {
-    res.sendFile(path.join(__dirname, "public/survey.html"));
+    res.sendFile(path.join(__dirname, "app/public/survey.html"));
   });
 
 // Displays all characters
