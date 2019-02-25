@@ -1,14 +1,3 @@
-// Dependencies
-// =============================================================
-var express = require("express");
-
-// Sets up the Express App
-// =============================================================
-var app = express();
-
-// Sets up the Express app to handle data parsing
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 // Friends (DATA)
 // =============================================================
@@ -31,15 +20,4 @@ var friends = [
   },
 ];
 
-// Create New Characters - takes in JSON input
-app.post("/api/friends", function(req, res) {
-    // req.body hosts is equal to the JSON post sent from the user
-    // This works because of our body parsing middleware
-    var newFriend = req.body;
-  
-    console.log(newFriend);
-  
-    friends.push(newFriend);
-  
-    res.json(newFriend);
-  });
+module.exports = friends;
