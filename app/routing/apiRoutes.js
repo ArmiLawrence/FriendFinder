@@ -26,12 +26,14 @@ app.post("/api/friends", function(req, res) {
     var newFriend = req.body;
     var matchName = "";
     var matchPhoto = "";
-  
+    var friendScoresArray = [];
+    var newFriendScoresArray = [];
+
   // For-each loop to go through the data in friends.js to find a match
     friends.forEach(function(friend) {
         // Variables for comparing matches
-        var friendScoresArray = [];
-        var newFriendScoresArray = [];
+        
+        
         var friendDifference = 0;
         var newFriendDifference = 0;
   
@@ -40,30 +42,19 @@ app.post("/api/friends", function(req, res) {
           return total + num;
         }
   
-        //loop through existing friend data scores into Array
-        for (var i = 0; i < friend.length; i++) {
-          console.log(friend.name[i]);
-          friendScoresArray.push(Math.abs(parseInt(friend.scores[i])));
-  
-        }
-        console.log(friendScoresArray);
-  
+          
         //loop through new friend data scores into Array
         for (var i = 0; i < newFriend.length; i++) {
-          console.log(newFriend.name[i]);
-          newFriendScoresArray.push(Math.abs(parseInt(newFriend.scores[i])));
-  
-        }
-        console.log(newFriendScoresArray)
         
-        // This reduces the matched scoresArray into a single value in a variable
-        friendDifference  = friendScoresArray.reduce(getSum);
-  
-        // This reduces the matched scoresArray into a single value in a variable
-        newFriendDifference = newFriendScoresArray.reduce(getSum);
-  
+          
+          newFriendScoresArray.push(parseInt(newFriend.scores));
+
+        //}
+        console.log(newFriendScoresArray);
+        
+        
         // If the above value is smaller than the previous difference...
-        if (newFriendDifference <= friendDifference ) {
+        if (Math.abs(newFriendDifference - friendDifference) <= 5 ) { //5 is a random number//
             
             // And set these variables to the appropriate friend match
             matchName = friend.name;
